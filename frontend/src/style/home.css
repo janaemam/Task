@@ -1,0 +1,70 @@
+*{
+    --lightWhite: #FFF4EC5;
+}
+
+.main{
+background-color: var(--white);
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+}
+header{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:  2rem;
+}
+header button{
+    border-radius: 25px;
+    border:none;
+    width: 6rem;
+    height: 2.2rem;
+    color: var(--white);
+    background-color: var(--blue);
+    font-weight: 600;
+    cursor: pointer;
+
+}
+header button:hover{
+    background-color: var(--pink);
+    color: var(--white);
+}
+
+table {
+    width: 60%;
+    min-height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: none;
+    background-color: var(--lightWhite);
+  
+  }
+th {
+    background-color: var(--blue);
+    font-weight: 600;
+    padding: 5px;
+    height: 1.6rem;
+    border-radius: 25px;
+    color: var(--white);
+    width: 33%;
+    text-align: center;
+}   
+
+td{
+    border-radius: 25px;
+    text-align: center;
+}
+td input{
+    border-radius: 25px;
+    border: none;
+    background-color: var(--white);
+    padding-left: 0.3rem;
+}
+td input:focus{
+    outline: none;
+}
+tr{
+    background-color: #89023f1e;
+}
