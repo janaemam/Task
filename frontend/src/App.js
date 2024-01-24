@@ -9,11 +9,22 @@ function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
 
-  useEffect(()=>{
-    if(localStorage.getItem('authenticated')){
-      setAuthenticated(true);
-    }  
+  const check = async () => {
 
+    const response = await fetch("/authenticated",{methods:'GET'});
+    const data = await response.json();
+    if(response.status === 200){
+      setAuthenticated(true);
+      localStorage.setItem('authenticated',true);
+      localStorage.setItem('username',data.username);
+    }
+    else{
+      setAuthenticated(false);
+    }
+  }
+
+  useEffect(()=>{
+      check();
 
   },[])
   

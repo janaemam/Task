@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+
 import'../style/home.css'
 
 const Home = () => {
+
     const [data,setData]= useState([]);
     const[username,setUsername]= useState('');
   
@@ -25,8 +27,18 @@ const Home = () => {
         }
         console.log(data);
     }
+    // const getResult = async (id,numero) => {
+    //     const response= await fetch("/calc",{method:'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //     body: JSON.stringify({"id":id,"numero":numero})
+    // }
+    //     );
+    //     return response.json().result;
+    // }
 
-    const calculateResult = (e, numero,index) => {
+    const calculateResult = async (e, numero,index, id) => {
         if(e.target.value === ''){
             setResults((prevResult)=>{
                 const newResult = [...prevResult];
@@ -40,8 +52,11 @@ const Home = () => {
         if(isNaN(inputValue)){
         alert("Please enter a number");
         }
+
         let temp= ((inputValue/numero)*100);
         temp = temp.toFixed(2);
+        // let temp = await getResult(id, numero)
+        // console.log(temp);
 
         setResults((prevResult)=>{
             const newResult = [...prevResult];
@@ -58,7 +73,8 @@ const Home = () => {
         if(response.status === 200){
             localStorage.removeItem('authenticated');
             localStorage.removeItem('username');
-            window.location.href = "/login";
+      
+            window.location.href = '/';
         }
         else{
             console.log("Logout Failed");
@@ -86,7 +102,7 @@ const Home = () => {
                     {data.map( (item, index)=>(
                         <tr key={item.id}>
                             <td>{item.numero}</td>
-                            <td><input type="number" onChange={(e)=>calculateResult(e, item.numero, index)}></input></td>
+                            <td><input type="number" onChange={(e)=>calculateResult(e, item.numero, index, item.id)}></input></td>
                             <td>
                                 <span>
                                 {results[index] !== undefined && results[index] !== '' ? `${results[index]}%` : ''}

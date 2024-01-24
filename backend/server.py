@@ -16,12 +16,13 @@ CORS(app, supports_credentials=True)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/autheticated', methods=['GET'])
+@app.route('/authenticated', methods=['GET'])
 def autheticated():
+    print(current_user)
     if current_user.is_authenticated:
-        return jsonify({'authenticated': True}), 200
+        return jsonify({'authenticated': True}), 200, current_user.username
     else:
-        return jsonify({'authenticated': False}), 401
+        return jsonify({'authenticated': False}), 401, None
 
 
 @app.route('/login', methods= ['POST'])
@@ -46,13 +47,14 @@ def register():
     return jsonify({'message': message}), status_code
 
 
-# @app.route('/calc', methods=['POST'])
-# def calculate():
-#     data=request.get_json()
-#     temp = data.get('numero')
-#     id = data.get('id')
-#     message, status_code, result = calc(temp, id)
-#     return jsonify({'message':message, 'result':result}), status_code,
+@app.route('/calc', methods=['POST'])
+def calculate():
+    data=request.get_json()
+    temp = data.get('numero')
+    id = data.get('id')
+    message, status_code, result = calc(temp, id)
+    print(result)
+    return jsonify({'message':message, 'result':result}), status_code,
     
 
 @app.route('/numeros', methods=['GET'])
